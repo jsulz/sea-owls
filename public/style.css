@@ -1,3 +1,89 @@
 body{
 	background: red;
 }
+
+/* 4. Navigation */
+
+#nav-wrapper {
+	width: 100%;
+	margin: 0 auto;
+	padding: 18px 32px;
+	top: 0;
+	position: fixed;
+	z-index: 100;
+	box-shadow: 0px 3px 7px black;
+	background: var(--green);
+}
+
+header:before{
+	clear: both;
+	content: '';
+}
+
+#menu-toggle {
+	display: none;
+}
+
+.fa-bars {
+	display: none;
+	font-size: 35px;
+}
+
+.flex-nav ul {
+	max-width: 1100px;
+	list-style: none;
+	margin: 0 auto;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.flex-nav a {
+	color: black;
+	text-decoration: none;
+	transition: all .5s ease-in;
+}
+
+.flex-nav a:hover {
+	color: white;
+}
+
+.flex-nav li {
+	flex: 3;
+}
+
+.flex-nav .social {
+	flex: 1;
+}
+
+@media screen and ( max-width: 768px ){
+
+	.flex-nav ul {
+		display: none;
+		height: 0;
+		opacity: 0;
+		align-items: baseline;
+		transition: all 1s ease-out;
+		flex-direction: column;
+	}
+
+	.flex-nav li {
+		flex: 1 1;
+		margin: 20px;
+		width: 80%;
+		border-bottom: 1px solid rgba( 255, 255, 255, .5 );
+	}
+
+	#menu-toggle:checked ~ ul {
+		display: flex;
+		opacity: 1;
+		height: auto;
+	}
+
+	.fa-bars {
+		display: block;
+	}
+
+}
