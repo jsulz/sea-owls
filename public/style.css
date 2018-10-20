@@ -112,7 +112,7 @@ a:hover {
 	position: fixed;
 	z-index: 100;
 	box-shadow: 0px 3px 7px black;
-	background: var(--green);
+	background: var(--off-white);
 }
 
 header:before{
@@ -226,8 +226,8 @@ main {
 	line-height: 28px;
 	display: block;
 	background-color: white;
-	border-top: 7px solid var(--yellow-orange);
-	border-bottom: 7px solid var(--burnt-orange);
+	border-top: 7px solid var(--maroon);
+	border-bottom: 7px solid var(--maroon);
 }
 
 main p {
