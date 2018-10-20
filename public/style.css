@@ -69,7 +69,7 @@ article a {
 	font-weight: 700;
 }
 
-.article-title {
+.page-title {
 	margin-bottom: 20px;
 }
 
@@ -185,4 +185,82 @@ header:before{
 		display: block;
 	}
 
+}
+
+/* 5. Header */
+
+.masthead {
+	margin-top: 50px;
+	text-align: center;
+	padding: 50px 0px;
+}
+
+.masthead section {
+	text-shadow : 2px 2px 3px #9b9b9b; 
+	margin: 30px;
+}
+
+.site-title {
+	 font-size: 65px;
+	 font-weight: 700;
+	 margin-bottom: 10px;
+	 line-height: 71.5px;
+}
+
+.description {
+	font-size: 25px;
+	line-height: 27.5px;
+}
+
+.site-title a {
+	text-decoration: none;
+	color: rgb( 0, 0, 0 );
+}
+
+/* 6. Body */
+
+main {
+	max-width: 1100px;
+	margin: 0 auto;
+	line-height: 28px;
+	display: block;
+	background-color: white;
+	border-top: 7px solid var(--yellow-orange);
+	border-bottom: 7px solid var(--burnt-orange);
+}
+
+main p {
+	margin-bottom: 20px;
+}
+
+main ul {
+	margin-bottom: 20px;
+	list-style-type: disc;
+	list-style-position: outside;
+}
+
+main ul li {
+	margin-left: 40px;
+}
+
+main ul > ul {
+	margin-left: 40px;
+	list-style-type: circle;
+	margin-bottom: 0px;
+}
+
+main ol {
+	list-style-type: decimal;
+	margin-left: 40px;
+	margin-bottom: 20px;
+}
+
+.page-content article {
+	margin: 0 auto;
+	max-width: 770px;
+	padding: 30px 15px 0px;
+}
+
+.page-content {
+	padding: 35px 0px;
 }
