@@ -1,0 +1,16 @@
+{
+  "name": "sea-owls",
+  "version": "1.0.0",
+  "description": "A Node/Express driven website for managing a book club.",
+  "main": "sever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jared Sulzdorf",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.15.0"
+  }
+}
