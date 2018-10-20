@@ -16,6 +16,90 @@
 
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
+/* Base */
+
+:root{
+	--slate-blue: #607f8a;
+	--black-blue: #2c353f;
+	--maroon: #a4767e;
+	--off-white: #f2e8de;
+	--tan: #e4d3c3;
+}
+
+html {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: helvetica, arial, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	color: rgb( 34, 34, 34 );
+	background: var(--off-white);
+}
+
+h1 {
+	font-size: 35px;
+	font-weight: 700;
+}
+
+h2 {
+	font-size: 30px;
+	font-weight: 700;
+}
+
+h3 {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+h4 {
+	font-size: 20px;
+	font-weight: 700;
+}
+
+a {
+	text-decoration: underline;
+	color: var(--slate-blue);
+	transition: all .5s ease;
+}
+
+article a {
+	font-weight: 700;
+}
+
+.article-title {
+	margin-bottom: 20px;
+}
+
+a:hover {
+	color: var(--green-hover);
+}
+
+.social a {
+	font-size: 30px;
+}
+
+.button {
+	margin: 5px 0px;
+	padding: 15px;
+	background: black;
+	display: inline-block;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: all .5s ease;
+}
+
+.button:hover {
+	color: white;
+	background: #333333;
+}
+
+.button-gone {
+	visibility: hidden;
+}
 
 /* 3. Navigation */
 
