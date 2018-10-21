@@ -23,28 +23,61 @@ app.use(bodyParser.json());
 app.use( express.static( 'public' ) );
 
 app.get('/',function(req,res,next){
-  var context = {};
-  var createString = "CREATE TABLE diagnostic(" +
-  "id INT PRIMARY KEY AUTO_INCREMENT," +
-  "text VARCHAR(255) NOT NULL)";
-  mysql.pool.query('DROP TABLE IF EXISTS diagnostic', function(err){
-    if(err){
-      next(err);
-      return;
-    }
-    mysql.pool.query(createString, function(err){
-      if(err){
-	next(err);
-                return;
-      }
-          mysql.pool.query('INSERT INTO diagnostic (`text`) VALUES ("MySQL is Working!")',function(err){
-            mysql.pool.query('SELECT * FROM diagnostic', function(err, rows, fields){
-                  context.results = JSON.stringify(rows);
-                  res.render('index',context);
-                });
-          });
-    });
-  });
+    res.render('index' );
+});
+
+app.get( '/members', ( req, res, next ) => {
+
+	mysql.pool.query( 'SELECT id, fname, lname, email, DATE_FORMAT(date_joined, "%m-%d-%Y") AS dateJoined FROM sea_owls', ( err, rows, fields ) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.members = rows;
+		res.render( 'members/members', context );
+
+	})
+
+});
+
+app.get( '/member/:memberID', ( req, res, next ) => {
+	
+});
+
+// don't worry about handling the server side stuff right now, just remember that we want a form here
+// this is for handling adding members
+app.post( '/members', ( req, res, next ) => {
+
+});
+
+app.get( '/books', ( req, res, next ) => {
+
+	mysql.pool.query( 'SELECT id, fname, lname, email, DATE_FORMAT(date_published, "%m-%d-%Y") AS datePublished FROM sea_owls', ( err, rows, fields ) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.books = rows;
+		res.render( 'books/books', context );
+
+	})
+
+});
+
+// don't worry about handling the server side stuff right now, just remember that we want a form here
+// This is for handling adding books
+app.post( '/books', ( req, res, next ) => {
+
+});
+
+app.get( '/book/:bookID', ( req, res, next ) => {
+
 });
 
 // It's good practice to include a 404 page, so we do

@@ -265,3 +265,35 @@ main ol {
 .page-content {
 	padding: 35px 0px;
 }
+
+/* Tables */
+
+table {
+	text-align: left;
+	width: 100%;
+}
+
+table tr:nth-child(even){
+	background-color: var(--off-white);
+}
+
+table tr:nth-child(even){
+	background-color: var(--tan);
+}
+
+table thead tr {
+	color: white;
+	background-color: var(--slate-blue);
+}
+
+/* Forms */
+
+article form {
+
+	margin: 30px 0;
+
+}
+
+table form {
+	margin: 0px;
+}
