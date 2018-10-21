@@ -133,6 +133,40 @@ app.post( '/books', ( req, res, next ) => {
 
 });
 
+app.get( '/genres', ( req, res, next ) => {
+
+	mysql.pool.query( 'SELECT id, name FROM genres', ( err, rows, fields ) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.genres = rows;
+		res.render( 'genres/genres', context );
+
+	})
+
+});
+
+app.get( '/authors', ( req, res, next ) => {
+
+	mysql.pool.query( 'SELECT id, fname, lname FROM authors', ( err, rows, fields ) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.authors = rows;
+		res.render( 'authors/authors', context );
+
+	})
+
+});
+
 // It's good practice to include a 404 page, so we do
 app.use( ( req, res ) => {
 	res.status( 404 );

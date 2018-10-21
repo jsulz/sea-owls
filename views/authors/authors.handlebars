@@ -1,0 +1,48 @@
+<article>
+	<h2 class="page-title">Authors</h2>
+	<h3>Add a New Author</h3>
+	<form action="/" method="post" id="new-author">
+
+		<fieldset>
+			<label for="fname">First Name
+				<input type="text" id="add-fname" name="fname">
+			</label>
+
+			<label for="lname">Last Name
+				<input type="text" id="add-lname" name="lname">
+			</label>
+
+			<input type="submit" id="new-author-submit" name="Submit">
+		</fieldset>
+
+	</form>
+	<h3>Current Authors in the Library</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		{{#each authors}}
+			<tr>
+				<td>{{this.fname}}</td>
+				<td>{{this.lname}}</td>
+				<td>
+					<form>
+						<input type="hidden" value="{{this.id}}" />
+						<input type="submit" class="edid" name="edit" value="Edit" />
+					</form>
+				</td>
+				<td>
+					<form>
+						<input type="hidden" value="{{this.id}}" />
+						<input type="submit" class="delete" name="delete" value="Delete" />
+					</form>
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+</article>

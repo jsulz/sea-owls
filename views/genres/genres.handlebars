@@ -1,0 +1,42 @@
+<article>
+	<h2 class="page-title">Genres</h2>
+	<h3>Add a New Genre</h3>
+	<form action="/" method="post" id="new-genre">
+
+		<fieldset>
+			<label for="name">Name
+				<input type="text" id="add-name" name="name">
+			</label>
+
+			<input type="submit" id="new-genre-submit" name="Submit">
+		</fieldset>
+
+	</form>
+	<h3>Current Genres in the Library</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		{{#each genres}}
+			<tr>
+				<td>{{this.name}}</td>
+				<td>
+					<form>
+						<input type="hidden" value="{{this.id}}" />
+						<input type="submit" class="edid" name="edit" value="Edit" />
+					</form>
+				</td>
+				<td>
+					<form>
+						<input type="hidden" value="{{this.id}}" />
+						<input type="submit" class="delete" name="delete" value="Delete" />
+					</form>
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+</article>
