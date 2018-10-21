@@ -1,0 +1,36 @@
+<article>
+	{{#each member}}
+	<h2 class="page-title">{{this.fname}} {{this.lname}}</h2>
+	<h3>Member Info</h3>
+	<ul>
+		<li>{{this.email}}</li>
+		<li>{{this.dateJoined}}</li>
+	</ul>
+	{{/each}}
+	<h3>Reading List</h3>
+	<p>Add a book to the reading list below by selecting from the current Sea Owls Library:</p>
+	<form>
+		<select>
+			{{#each books}}
+			<option value="{{this.id}}">{{this.title}}</option>
+			{{/each}}
+		</select>
+		<input type="submit" name="add-to-reading-list" name="Add to List">
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Book Title</th>
+				<th>Read/Reading</th>
+			</tr>			
+		</thead>
+		<tbody>
+			{{#each readingList}}
+				<tr>
+					<td>{{this.title}}</td>
+					<td>{{this.finished}}</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</article>

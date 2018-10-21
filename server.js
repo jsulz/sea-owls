@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // And make sure that we have use of our public directory
-app.use( express.static( 'public' ) );
+app.use(express.static('public'));
 
 app.get('/',function(req,res,next){
     res.render('index' );
@@ -28,7 +28,7 @@ app.get('/',function(req,res,next){
 
 app.get( '/members', ( req, res, next ) => {
 
-	mysql.pool.query( 'SELECT id, fname, lname, email, DATE_FORMAT(date_joined, "%m-%d-%Y") AS dateJoined FROM sea_owls', ( err, rows, fields ) => {
+	mysql.pool.query( 'SELECT id, fname, lname FROM sea_owls', ( err, rows, fields ) => {
 
 		if( err ){
 			next(err);
@@ -43,19 +43,48 @@ app.get( '/members', ( req, res, next ) => {
 
 });
 
+// Show the user's books being read/have already read
 app.get( '/member/:memberID', ( req, res, next ) => {
+
+	mysql.pool.query( 'SELECT id, fname, lname, email, DATE_FORMAT(date_joined, "%m-%d-%Y") AS dateJoined FROM sea_owls WHERE id=?', req.params.memberID, ( err, rows, fields ) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.member = rows;
+
+		mysql.pool.query( 'SELECT SO.id, B.title, RL.finished FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?', req.params.memberID, (err, rows, fields ) => {
+
+			context.readingList = rows;
+
+			mysql.pool.query( 'SELECT id, title FROM books', ( err, rows, fields ) => {
+
+
+				context.books = rows; 
+
+				res.render( 'members/member', context );
+
+			});
+
+		});	
+
+	});
 	
 });
 
 // don't worry about handling the server side stuff right now, just remember that we want a form here
 // this is for handling adding members
+// INSERT
 app.post( '/members', ( req, res, next ) => {
 
 });
 
 app.get( '/books', ( req, res, next ) => {
 
-	mysql.pool.query( 'SELECT id, fname, lname, email, DATE_FORMAT(date_published, "%m-%d-%Y") AS datePublished FROM sea_owls', ( err, rows, fields ) => {
+	mysql.pool.query( 'SELECT id, title, genre, isbn, date_published FROM books', ( err, rows, fields ) => {
 
 		if( err ){
 			next(err);
@@ -64,19 +93,43 @@ app.get( '/books', ( req, res, next ) => {
 
 		let context = {};
 		context.books = rows;
-		res.render( 'books/books', context );
+
+		mysql.pool.query( 'SELECT id, name FROM genres', (err, rows, fields ) => {
+
+			context.genres = rows;
+
+			mysql.pool.query( 'SELECT id, fname, lname FROM authors', (err, rows, fields ) => {
+
+				context.authors = rows;
+				res.render( 'books/books', context );
+
+			})
+		});
 
 	})
 
 });
 
-// don't worry about handling the server side stuff right now, just remember that we want a form here
-// This is for handling adding books
-app.post( '/books', ( req, res, next ) => {
+app.get( '/book/:bookID', ( req, res, next ) => {
 
+	mysql.pool.query('SELECT B.id, B.title, B.isbn, B.date_published, A.fname, A.lname, G.name FROM books B INNER JOIN authored_by AB ON AB.bid = B.id INNER JOIN authors A ON A.id = AB.aid INNER JOIN genres G ON G.id = B.genre WHERE B.id =?', req.params.bookID, ( err, rows, fields) => {
+
+		if( err ){
+			next(err);
+			return;
+		}
+
+		let context = {};
+		context.book = rows;
+		res.render( 'books/book', context );
+
+	});
 });
 
-app.get( '/book/:bookID', ( req, res, next ) => {
+// don't worry about handling the server side stuff right now, just remember that we want a form here
+// This is for handling adding books
+// INSERT
+app.post( '/books', ( req, res, next ) => {
 
 });
 

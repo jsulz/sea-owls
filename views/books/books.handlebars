@@ -1,0 +1,92 @@
+<article>
+	<h2 class="page-title">Books</h2>
+	<h3>Add a New Book to the Sea OWL Library</h3>
+	<form action="/" method="post" id="new-book">
+
+		<fieldset>
+			<label for="fname">First Name
+				<input type="text" id="add-fname" name="fname">
+			</label>
+
+			<label for="lname">Last Name
+				<input type="text" id="add-lname" name="lname">
+			</label>
+
+			<label for="weight">Email
+				<input type="email" id="add-email" name="email">
+			</label>
+
+			<label for="date">Date Published
+				<input type="date" id="add-date" name="date-joined">
+			</label>
+
+			<label for="author">Author
+				<select>
+					{{#each authors}}
+					<option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+					{{/each}}
+				</select>
+			</label>
+
+			<label for="author">Genre
+				<select>
+					{{#each genres}}
+					<option value="{{this.id}}">{{this.name}}</option>
+					{{/each}}
+				</select>
+			</label>
+
+			<input type="submit" id="new-member-submit" name="Submit">
+		</fieldset>
+
+	</form>
+
+	<p>If you don't see the author or genre related to the book that you'd like to add in the corresponding dropdown menus in the form above, please add the author using one of the forms below.</p>
+	<h3>For Genres</h3>
+	<form action="/" method="post" id="add-genre" >
+		<label for="genre-name">Genre Name
+			<input type="text" id="add-genre-name" name="genre-name">
+		</label>
+		<input type="submit" id="new-genre-submit" name="Submit">
+	</form>
+
+	<h3>For Authors</h3>
+	<form action="/" method="post" id="add-author" >
+		<label for="author-fname">First Name
+			<input type="text" id="add-author-fname" name="author-fname">
+		</label>
+		<label for="author-lname">Last Name
+			<input type="text" id="add-author-lname" name="author-lname">
+		</label>
+		<input type="submit" id="new-author-submit" name="Submit">
+	</form>
+	<h3>Current Books in the Sea OWL Library</h3>
+	<form action="/" method="post" id="search" >
+		<label for="search">Search by Title
+			<input type="text" id="title-search" name="Search">
+		</label>
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Year Published</th>
+				<th>View</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		{{#each books}}
+			<tr>
+				<td>{{this.title}}</td>
+				<td>{{this.date_published}}</td>
+				<td><a href="/book/{{this.id}}">View</a></td>
+				<td>
+					<form>
+						<input type="hidden" value="{{this.id}}" />
+						<input type="submit" class="delete" name="delete" value="Delete" />
+					</form>
+				</td>
+			</tr>
+		{{/each}}
+	</table>
+</article>
