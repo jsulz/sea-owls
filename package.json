@@ -9,6 +9,7 @@
   "author": "Jared Sulzdorf",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^6.1.0",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "mysql": "^2.15.0"
