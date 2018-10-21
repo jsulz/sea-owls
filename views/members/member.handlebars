@@ -22,13 +22,26 @@
 			<tr>
 				<th>Book Title</th>
 				<th>Read/Reading</th>
+				<th>Delete</th>
 			</tr>			
 		</thead>
 		<tbody>
 			{{#each readingList}}
 				<tr>
 					<td>{{this.title}}</td>
-					<td>{{this.finished}}</td>
+					<td>
+						{{this.finished}}
+						<form style="display: inline-block">
+							<input type="hidden" value="{{this.mid}}-{{this.bid}}" />
+							<input type="submit" class="edit" name="edit" value="Update Reading/Read" />
+						</form>
+					</td>
+					<td>
+						<form>
+							<input type="hidden" value="{{this.mid}}-{{this.bid}}" />
+							<input type="submit" class="delete" name="delete" value="Delete" />
+						</form>
+					</td>
 				</tr>
 			{{/each}}
 		</tbody>

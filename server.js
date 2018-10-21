@@ -56,7 +56,7 @@ app.get( '/member/:memberID', ( req, res, next ) => {
 		let context = {};
 		context.member = rows;
 
-		mysql.pool.query( 'SELECT SO.id, B.title, RL.finished FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?', req.params.memberID, (err, rows, fields ) => {
+		mysql.pool.query( 'SELECT SO.id, B.title, RL.finished, RL.bid, RL.mid FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?', req.params.memberID, (err, rows, fields ) => {
 
 			context.readingList = rows;
 
