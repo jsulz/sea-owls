@@ -25,19 +25,19 @@ app.use(express.static('public'));
 const {index} = require( './routes/index' );
 const {viewGenres} = require( './routes/genres' );
 const {viewAuthors} = require( './routes/authors' );
-const {viewMembers, viewMember } = require( './routes/members' );
+const {viewMembers, viewMember, addMember } = require( './routes/members' );
 const { viewBooks, viewBook } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
+// Homepage
 app.get('/', index );
+
 // View all members
 app.get( '/members', viewMembers );
-// View a single book
+// View a single member
 app.get( '/member/:memberID', viewMember );
 // Add a new Member
-app.post( '/members', ( req, res, next ) => {
-
-});
+app.post( '/members', addMember );
 // View all books
 app.get( '/books', viewBooks );
 // Vuew a single book

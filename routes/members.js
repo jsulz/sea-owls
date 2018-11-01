@@ -31,7 +31,8 @@ module.exports = {
 			let context = {};
 			context.member = rows;
 
-			mysql.pool.query( 'SELECT SO.id, B.title, RL.finished, RL.bid, RL.mid FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?', req.params.memberID, (err, rows, fields ) => {
+			mysql.pool.query( 'SELECT SO.id, B.title, RL.finished, RL.bid, RL.mid FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?', 
+				req.params.memberID, (err, rows, fields ) => {
 
 				context.readingList = rows;
 
@@ -48,6 +49,22 @@ module.exports = {
 
 		});
 		
+	},
+
+	addMember: ( req, res, next ) => {
+
+		mysql.pool.query( 'INSERT INTO sea_owls (`fname`, `lname`, `email`, `date_joined`) VALUES ( ?, ?, ?, ? )', 
+			[ req.body.fname, req.body.lname, req.body.email, req.body.date_joined ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect( '/members' ) ;
+
+		})
+
 	}
 
 
