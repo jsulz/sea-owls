@@ -61,8 +61,7 @@ module.exports = {
 					return;
 				}
 
-				res.redirect( '/members' ) ;
-
+				res.redirect(req.get('referer'));
 		})
 
 	}

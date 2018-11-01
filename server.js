@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 const {index} = require( './routes/index' );
-const {viewGenres} = require( './routes/genres' );
+const { viewGenres, addGenres } = require( './routes/genres' );
 const {viewAuthors} = require( './routes/authors' );
 const {viewMembers, viewMember, addMember } = require( './routes/members' );
 const { viewBooks, viewBook } = require( './routes/books' );
@@ -49,6 +49,8 @@ app.post( '/books', ( req, res, next ) => {
 
 // View all genres
 app.get( '/genres', viewGenres );
+// Add a new genre
+app.post( '/genres', addGenres );
 // View all authors
 app.get( '/authors', viewAuthors );
 

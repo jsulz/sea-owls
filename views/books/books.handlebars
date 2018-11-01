@@ -43,9 +43,9 @@
 
 	<p>If you don't see the author or genre related to the book that you'd like to add in the corresponding dropdown menus in the form above, please add the author using one of the forms below, or go to the <a href="/genres"><strong>Genre<strong></a> or <a href="/authors"><strong>Authors</strong></a> page to see all genres and authors and manage them there!</p>
 	<h3>Add a New Genre</h3>
-	<form action="/" method="post" id="add-genre" >
-		<label for="genre-name">Genre Name
-			<input type="text" id="add-genre-name" name="genre-name">
+	<form action="/genres" method="POST" id="add-genre" >
+		<label for="name">Genre Name
+			<input type="text" id="add-genre-name" name="name">
 		</label>
 		<input type="submit" id="new-genre-submit" name="Submit">
 	</form>

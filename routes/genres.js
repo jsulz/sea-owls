@@ -16,6 +16,21 @@ module.exports = {
 			res.render( 'genres/genres', context );
 
 		});
+	},
+
+	addGenres: ( req, res, next ) => {
+
+		mysql.pool.query( 'INSERT INTO genres ( `name` ) VALUES( ? )', req.body.name, ( err, result ) => {
+
+			if( err ){
+				next( err );
+				return;
+			}
+
+			res.redirect(req.get('referer'));
+
+		} )
+
 	}
 
 }
