@@ -22,10 +22,10 @@ app.use(bodyParser.json());
 // And make sure that we have use of our public directory
 app.use(express.static('public'));
 
-const {index} = require( './routes/index' );
+const { index } = require( './routes/index' );
 const { viewGenres, addGenres } = require( './routes/genres' );
-const {viewAuthors} = require( './routes/authors' );
-const {viewMembers, viewMember, addMember } = require( './routes/members' );
+const { viewAuthors, addAuthors } = require( './routes/authors' );
+const { viewMembers, viewMember, addMember } = require( './routes/members' );
 const { viewBooks, viewBook } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
@@ -38,6 +38,7 @@ app.get( '/members', viewMembers );
 app.get( '/member/:memberID', viewMember );
 // Add a new Member
 app.post( '/members', addMember );
+
 // View all books
 app.get( '/books', viewBooks );
 // Vuew a single book
@@ -52,7 +53,10 @@ app.get( '/genres', viewGenres );
 // Add a new genre
 app.post( '/genres', addGenres );
 // View all authors
+
 app.get( '/authors', viewAuthors );
+// Add an author
+app.post( '/authors', addAuthors );
 
 // It's good practice to include a 404 page, so we do
 app.use( pageNotFound );
