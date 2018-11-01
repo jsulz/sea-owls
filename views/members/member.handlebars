@@ -9,8 +9,8 @@
 	{{/each}}
 	<h3>Reading List</h3>
 	<p>Add a book to the reading list below by selecting from the current Sea Owls Library:</p>
-	<form action="/members">
-		<select>
+	<form method="POST">
+		<select name="bid">
 			{{#each books}}
 			<option value="{{this.id}}">{{this.title}}</option>
 			{{/each}}

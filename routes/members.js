@@ -15,7 +15,7 @@ module.exports = {
 			context.members = rows;
 			res.render( 'members/members', context );
 
-		})
+		});
 
 	},
 
@@ -62,7 +62,22 @@ module.exports = {
 				}
 
 				res.redirect(req.get('referer'));
-		})
+		});
+
+	}, 
+
+	addToReadingList: ( req, res, next ) => {
+
+		mysql.pool.query( 'INSERT INTO reading_list ( `mid`, `bid` ) VALUES ( ?, ? )', [ req.params.memberID, req.body.bid ], ( err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+
+		});
 
 	}
 

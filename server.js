@@ -25,7 +25,7 @@ app.use(express.static('public'));
 const { index } = require( './routes/index' );
 const { viewGenres, addGenres } = require( './routes/genres' );
 const { viewAuthors, addAuthors } = require( './routes/authors' );
-const { viewMembers, viewMember, addMember } = require( './routes/members' );
+const { viewMembers, viewMember, addMember, addToReadingList } = require( './routes/members' );
 const { viewBooks, viewBook, addBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
@@ -38,6 +38,8 @@ app.get( '/members', viewMembers );
 app.get( '/member/:memberID', viewMember );
 // Add a new Member
 app.post( '/members', addMember );
+// Update a member's reading list
+app.post( '/member/:memberID', addToReadingList );
 
 // View all books
 app.get( '/books', viewBooks );
