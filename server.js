@@ -26,7 +26,7 @@ const { index } = require( './routes/index' );
 const { viewGenres, addGenres } = require( './routes/genres' );
 const { viewAuthors, addAuthors } = require( './routes/authors' );
 const { viewMembers, viewMember, addMember } = require( './routes/members' );
-const { viewBooks, viewBook } = require( './routes/books' );
+const { viewBooks, viewBook, addBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
 // Homepage
@@ -44,9 +44,7 @@ app.get( '/books', viewBooks );
 // Vuew a single book
 app.get( '/book/:bookID', viewBook );
 // Add a new book
-app.post( '/books', ( req, res, next ) => {
-
-});
+app.post( '/books', addBooks );
 
 // View all genres
 app.get( '/genres', viewGenres );

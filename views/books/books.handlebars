@@ -1,35 +1,31 @@
 <article>
 	<h2 class="page-title">Books</h2>
 	<h3>Add a New Book to the Sea OWL Library</h3>
-	<form action="/" method="post" id="new-book">
+	<form action="/books" method="POST" id="new-book">
 
 		<fieldset>
-			<label for="fname">First Name
-				<input type="text" id="add-fname" name="fname">
-			</label>
-
-			<label for="lname">Last Name
-				<input type="text" id="add-lname" name="lname">
-			</label>
-
-			<label for="weight">Email
-				<input type="email" id="add-email" name="email">
+			<label for="title">Title
+				<input type="text" id="add-title" name="title">
 			</label>
 
 			<label for="date">Date Published
-				<input type="date" id="add-date" name="date-joined">
+				<input type="date" id="add-date" name="date_published">
+			</label>
+
+			<label for="isbn">ISBN
+				<input type="text" id="add-isbn" name="isbn">
 			</label>
 
 			<label for="author">Author
-				<select>
+				<select name="author">
 					{{#each authors}}
 					<option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
 					{{/each}}
 				</select>
 			</label>
 
-			<label for="author">Genre
-				<select>
+			<label for="genre">Genre
+				<select name="genre">
 					{{#each genres}}
 					<option value="{{this.id}}">{{this.name}}</option>
 					{{/each}}

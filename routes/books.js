@@ -44,6 +44,30 @@ module.exports = {
 			res.render( 'books/book', context );
 
 		});
+	},
+
+	addBooks: ( req, res, next ) => {
+
+		mysql.pool.query( 'INSERT INTO books ( `title`, `genre`, `date_published`, `isbn` ) VALUES ( ?, ?, ?, ? )', [ req.body.title, req.body.genre, req.body.date_published, req.body.isbn ], ( err, result ) => {
+
+			if( err ){
+				next( err );
+				return;
+			}
+
+			mysql.pool.query( 'INSERT INTO authored_by ( `bid`, `aid` ) VALUES ( ?, ? )', [ result.insertId, req.body.author ], ( err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+
+			})
+
+		})
+
 	}
 
 
