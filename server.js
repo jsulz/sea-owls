@@ -25,7 +25,7 @@ app.use(express.static('public'));
 const { index } = require( './routes/index' );
 const { viewGenres, addGenres } = require( './routes/genres' );
 const { viewAuthors, addAuthors } = require( './routes/authors' );
-const { viewMembers, viewMember, addMember, addToReadingList } = require( './routes/members' );
+const { viewMembers, viewMember, addMember, addToReadingList, deleteMember } = require( './routes/members' );
 const { viewBooks, viewBook, addBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
@@ -40,6 +40,8 @@ app.get( '/member/:memberID', viewMember );
 app.post( '/members', addMember );
 // Update a member's reading list
 app.post( '/member/:memberID', addToReadingList );
+// Delete a member from sea_owls
+app.post( '/members', deleteMember );
 
 // View all books
 app.get( '/books', viewBooks );
