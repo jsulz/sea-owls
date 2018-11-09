@@ -79,6 +79,20 @@ module.exports = {
 
 		});
 
+	},
+	
+	deleteMember: ( req, res, next ) => {
+
+		mysql.pool.query( 'DELETE FROM `sea_owls` WHERE `id` =?', [ req.params.memberID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 
