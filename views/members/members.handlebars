@@ -36,8 +36,8 @@
 				<td>{{this.lname}}</td>
 				<td><a href="/member/{{this.id}}">View</a></td>
 				<td>
-					<form>
-						<input type="hidden" value="{{this.id}}" />
+					<form action="/members" method="POST" id="delete-member">
+						<input type="hidden" value="{{this.id}}" name="memberID"/>
 						<input type="submit" class="delete" name="delete" value="Delete" />
 					</form>
 				</td>
