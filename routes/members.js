@@ -53,7 +53,7 @@ module.exports = {
 
 	addMember: ( req, res, next ) => {
 
-		mysql.pool.query( 'INSERT INTO sea_owls (`fname`, `lname`, `email`, `date_joined`) VALUES ( ?, ?, ?, ? )', 
+		mysql.pool.query( 'INSERT INTO sea_owls (`fname`, `lname`, `email`, `date_joined`) VALUES ( ?, ?, ?, CURRENT_DATE )', 
 			[ req.body.fname, req.body.lname, req.body.email, req.body.date_joined ],  (err, result ) => {
 
 				if( err ){
