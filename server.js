@@ -25,7 +25,7 @@ app.use(express.static('public'));
 const { index } = require( './routes/index' );
 const { viewGenres, addGenres } = require( './routes/genres' );
 const { viewAuthors, addAuthors } = require( './routes/authors' );
-const { viewMembers, viewMember, addMember, addToReadingList } = require( './routes/members' );
+const { viewMembers, viewMember, addMember, addToReadingList, deleteMember } = require( './routes/members' );
 const { viewBooks, viewBook, addBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
@@ -36,8 +36,18 @@ app.get('/', index );
 app.get( '/members', viewMembers );
 // View a single member
 app.get( '/member/:memberID', viewMember );
-// Add a new Member
-app.post( '/members', addMember );
+app.post( '/members', ( req, res, next ) => {
+
+	// Add a new Member
+	if( req.body['add'] ){
+		addMember( req, res, next );
+	} 
+	// Delete the specified Member
+	else if ( req.body['delete'] ){
+		deleteMember( req, res, next );
+	}
+
+});
 // Update a member's reading list
 app.post( '/member/:memberID', addToReadingList );
 
