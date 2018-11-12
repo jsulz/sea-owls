@@ -36,20 +36,20 @@ app.get('/', index );
 app.get( '/members', viewMembers );
 // View a single member
 app.get( '/member/:memberID', viewMember );
-// Add a new Member
 app.post( '/members', ( req, res, next ) => {
 
+	// Add a new Member
 	if( req.body['add'] ){
 		addMember( req, res, next );
-	} else if ( req.body['delete'] ){
+	} 
+	// Delete the specified Member
+	else if ( req.body['delete'] ){
 		deleteMember( req, res, next );
 	}
 
 });
 // Update a member's reading list
 app.post( '/member/:memberID', addToReadingList );
-// Delete a member from sea_owls
-//app.post( '/members', deleteMember );
 
 // View all books
 app.get( '/books', viewBooks );
