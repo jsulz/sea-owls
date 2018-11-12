@@ -83,7 +83,7 @@ module.exports = {
 	
 	deleteMember: ( req, res, next ) => {
 
-		mysql.pool.query( 'DELETE FROM `sea_owls` WHERE `id` =?', [ req.params.memberID ],  (err, result ) => {
+		mysql.pool.query( 'DELETE FROM `sea_owls` WHERE `id` =?', [ req.body.memberID ],  (err, result ) => {
 
 				if( err ){
 					next( err );
