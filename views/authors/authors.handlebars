@@ -12,7 +12,7 @@
 				<input type="text" id="add-lname" name="lname">
 			</label>
 
-			<input type="submit" id="new-author-submit" name="Submit">
+			<input type="submit" id="new-author-submit" name="add" value="Submit" >
 		</fieldset>
 
 	</form>
@@ -37,8 +37,8 @@
 					</form>
 				</td>
 				<td>
-					<form>
-						<input type="hidden" value="{{this.id}}" />
+					<form action="/authors" method="POST" id="delete-author">
+						<input type="hidden" value="{{this.id}}" name="authorID"/>
 						<input type="submit" class="delete" name="delete" value="Delete" />
 					</form>
 				</td>
