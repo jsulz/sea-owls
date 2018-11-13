@@ -68,6 +68,20 @@ module.exports = {
 
 		})
 
+	},
+	
+	deleteBook: ( req, res, next ) => {
+
+		mysql.pool.query( 'DELETE FROM books WHERE `id` = ?', [ req.body.bookID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 
