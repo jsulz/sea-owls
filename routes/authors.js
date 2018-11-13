@@ -31,6 +31,20 @@ module.exports = {
 			res.redirect(req.get('referer'));
 		})
 
+	},
+	
+	deleteAuthor: ( req, res, next ) => {
+
+		mysql.pool.query( 'DELETE FROM authors WHERE `id` = ?', [ req.body.authorID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 
