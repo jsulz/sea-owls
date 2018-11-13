@@ -31,6 +31,20 @@ module.exports = {
 
 		} )
 
+	},
+	
+	deleteGenre: ( req, res, next ) => {
+
+		mysql.pool.query( 'DELETE FROM genres WHERE `id` = ?', [ req.body.genreID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 }
