@@ -31,8 +31,8 @@
 					</form>
 				</td>
 				<td>
-					<form>
-						<input type="hidden" value="{{this.id}}" />
+					<form action="/genres" method="POST" id="delete-genre">
+						<input type="hidden" value="{{this.id}}" name="genreID"/>
 						<input type="submit" class="delete" name="delete" value="Delete" />
 					</form>
 				</td>
