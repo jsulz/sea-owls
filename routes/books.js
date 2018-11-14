@@ -23,16 +23,16 @@ module.exports = {
 					context.authors = rows;
 					res.render( 'books/books', context );
 
-				})
+				});
 			});
 
-		})
+		});
 
 	},
 
 	viewBook: ( req, res, next ) => {
 
-		mysql.pool.query('SELECT B.id, B.title, B.isbn, B.date_published, A.fname, A.lname, G.name FROM books B INNER JOIN authored_by AB ON AB.bid = B.id INNER JOIN authors A ON A.id = AB.aid INNER JOIN genres G ON G.id = B.genre WHERE B.id =?', req.params.bookID, ( err, rows, fields) => {
+		mysql.pool.query('SELECT title, isbn, date_published FROM books WHERE id=?', req.params.bookID, ( err, rows, fields) => {
 
 			if( err ){
 				next(err);
@@ -41,7 +41,33 @@ module.exports = {
 
 			let context = {};
 			context.book = rows;
-			res.render( 'books/book', context );
+
+			mysql.pool.query( 'SELECT aid FROM authored_by WHERE bid=?', req.params.bookID, ( err, rows, fields ) => {
+				if( err ){
+					next(err);
+					return;
+				}
+
+				context.aid = rows;
+
+				if( context.aid.length > 0 ){
+
+					mysql.pool.query( 'SELECT fname, lname FROM authors WHERE id=?', context.aid[0].aid, ( err, rows, fields ) => {
+
+						context.book[0].fname = rows[0].fname;
+						context.book[0].lname = rows[0].lname;
+
+						res.render( 'books/book', context );
+
+					});
+
+				} else {
+					
+					context.book[0].fname = "No Author";
+					res.render( 'books/book', context );
+
+				}
+			});
 
 		});
 	},
@@ -64,9 +90,9 @@ module.exports = {
 
 				res.redirect(req.get('referer'));
 
-			})
+			});
 
-		})
+		});
 
 	},
 	

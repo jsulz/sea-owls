@@ -80,6 +80,25 @@ module.exports = {
 		});
 
 	},
+
+	deleteFromReadingList: ( req, res, next ) => {
+
+		let member_book = req.body['mid-bid'].split('-');
+		let memberID = member_book[0]
+		let bookID = member_book[1];
+		
+		mysql.pool.query( 'DELETE FROM reading_list WHERE mid=? AND bid=?', [ memberID, bookID ], ( err, result ) => {
+
+			if( err ){
+				next( err );
+				return;
+			}
+
+			res.redirect(req.get('referer'));
+
+		});
+
+	},
 	
 	deleteMember: ( req, res, next ) => {
 
