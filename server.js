@@ -23,10 +23,10 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 const { index } = require( './routes/index' );
-const { viewGenres, addGenres } = require( './routes/genres' );
-const { viewAuthors, addAuthors } = require( './routes/authors' );
-const { viewMembers, viewMember, addMember, addToReadingList, deleteMember } = require( './routes/members' );
-const { viewBooks, viewBook, addBooks } = require( './routes/books' );
+const { viewGenres, addGenres, deleteGenre } = require( './routes/genres' );
+const { viewAuthors, addAuthors, deleteAuthor } = require( './routes/authors' );
+const { viewMembers, viewMember, addMember, addToReadingList, deleteMember, deleteFromReadingList } = require( './routes/members' );
+const { viewBooks, viewBook, addBooks, deleteBook } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
 // Homepage
@@ -48,25 +48,66 @@ app.post( '/members', ( req, res, next ) => {
 	}
 
 });
-// Update a member's reading list
-app.post( '/member/:memberID', addToReadingList );
+// Add to a member's reading list
+app.post( '/member/:memberID', (req, res, next ) => {
+
+	if( req.body['add-to-reading-list'] ){
+		addToReadingList( req, res, next );
+	} else if ( req.body['delete'] ){
+		deleteFromReadingList( req, res, next );
+	}
+
+} );
 
 // View all books
 app.get( '/books', viewBooks );
 // Vuew a single book
 app.get( '/book/:bookID', viewBook );
 // Add a new book
-app.post( '/books', addBooks );
+app.post( '/books', ( req, res, next ) => {
+
+	// Add a new book
+	if( req.body['add'] ){
+		addBooks( req, res, next );
+	} 
+	// Delete the specified book
+	else if ( req.body['delete'] ){
+		deleteBook( req, res, next );
+	}
+
+});
+
 
 // View all genres
 app.get( '/genres', viewGenres );
-// Add a new genre
-app.post( '/genres', addGenres );
-// View all authors
+app.post( '/genres', ( req, res, next ) => {
 
+	// Add a new genre
+	if( req.body['add'] ){
+		addGenres( req, res, next );
+	} 
+	// Delete the specified genre
+	else if ( req.body['delete'] ){
+		deleteGenre( req, res, next );
+	}
+
+});
+
+// View all authors
 app.get( '/authors', viewAuthors );
 // Add an author
-app.post( '/authors', addAuthors );
+app.post( '/authors', ( req, res, next ) => {
+
+	// Add a new author
+	if( req.body['add'] ){
+		addAuthors( req, res, next );
+	} 
+	// Delete the specified author
+	else if ( req.body['delete'] ){
+		deleteAuthor( req, res, next );
+	}
+
+});
 
 // It's good practice to include a 404 page, so we do
 app.use( pageNotFound );

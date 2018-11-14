@@ -8,7 +8,7 @@
 				<input type="text" id="add-name" name="name">
 			</label>
 
-			<input type="submit" id="new-genre-submit" name="Submit">
+			<input type="submit" id="new-genre-submit" name="add" value="Submit">
 		</fieldset>
 
 	</form>
@@ -31,8 +31,8 @@
 					</form>
 				</td>
 				<td>
-					<form>
-						<input type="hidden" value="{{this.id}}" />
+					<form action="/genres" method="POST" id="delete-genre">
+						<input type="hidden" value="{{this.id}}" name="genreID"/>
 						<input type="submit" class="delete" name="delete" value="Delete" />
 					</form>
 				</td>

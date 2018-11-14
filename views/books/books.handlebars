@@ -32,7 +32,7 @@
 				</select>
 			</label>
 
-			<input type="submit" id="new-member-submit" name="Submit">
+			<input type="submit" id="new-book-submit" name="add" value="Submit">
 		</fieldset>
 
 	</form>
@@ -77,8 +77,8 @@
 				<td>{{this.date_published}}</td>
 				<td><a href="/book/{{this.id}}">View</a></td>
 				<td>
-					<form>
-						<input type="hidden" value="{{this.id}}" />
+					<form action="/books" method="POST" id="delete-book">
+						<input type="hidden" value="{{this.id}}" name="bookID"/>
 						<input type="submit" class="delete" name="delete" value="Delete" />
 					</form>
 				</td>
