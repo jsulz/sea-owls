@@ -17,6 +17,15 @@
 
 	</form>
 	<h3>Current Authors in the Library</h3>
+		{{#if error}}
+			<p>We're sorry, that author cannot currently be removed as they are currently an author on the following title(s):</p>
+			<ul>
+			{{#each errorBookTitles}}
+				<li>{{title}}</li>
+			{{/each}}
+			</ul>
+			<p>Please delete or update those books accordingly and try again.</p>
+		{{/if}}
 	<table>
 		<thead>
 			<tr>

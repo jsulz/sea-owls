@@ -13,6 +13,7 @@ module.exports = {
 
 			let context = {};
 			context.authors = rows;
+			context.error = false;
 			res.render( 'authors/authors', context );
 
 		})
@@ -38,11 +39,34 @@ module.exports = {
 		mysql.pool.query( 'DELETE FROM authors WHERE `id` = ?', [ req.body.authorID ],  (err, result ) => {
 
 				if( err ){
-					next( err );
-					return;
-				}
+					let context = {};
+					context.error = true;
+					
+					mysql.pool.query( 'SELECT b.title, a.id FROM authors a INNER JOIN authored_by ON authored_by.aid=a.id INNER JOIN books b on b.id=authored_by.bid WHERE a.id=?', req.body.authorID, ( err, result ) => {
 
-				res.redirect(req.get('referer'));
+						context.errorBookTitles = result;
+
+						mysql.pool.query( 'SELECT id, fname, lname FROM authors', ( err, rows, fields ) => {
+
+							if( err ){
+								next(err);
+								return;
+							}
+
+							context.authors = rows;
+							console.log( context );
+							res.render( 'authors/authors', context );
+
+						})
+
+					} )
+
+				} else {
+
+					res.redirect(req.get('referer'));
+
+				}
+		
 		});
 
 	}
