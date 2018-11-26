@@ -1,14 +1,15 @@
+var genres = [].slice.call(document.getElementsByClassName("genre-edit"));
 
-var genres = document.getElementsByClassName("genre-edit");
+genres.forEach( genre => {
 
-for each (genre in genres) {
-  genre.addEventListener("click", function(){ displayForm(genre) });
-}
+	genre.addEventListener("click", function(){ displayForm(genre) });
+
+});
 
 //Displays the hidden edit form and autofills the values of the inputs to the current name/id
 function displayForm(genre) {
   var id = (genre.id).substr(6);
-  var name = genre.getAttribute("name").;
+  var name = genre.getAttribute("name");
   var editform = document.getElementById("genre-edit-form");
  
   document.getElementById("edit-genre-id").value = id;
