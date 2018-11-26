@@ -2,7 +2,13 @@ var genres = [].slice.call(document.getElementsByClassName("genre-edit"));
 
 genres.forEach( genre => {
 
-	genre.addEventListener("click", function(){ displayForm(genre) });
+	genre.addEventListener("click", function( e ){ 
+		
+		e.preventDefault();
+
+		displayForm(genre) 
+
+	});
 
 });
 
