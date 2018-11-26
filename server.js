@@ -90,6 +90,12 @@ app.post( '/genres', ( req, res, next ) => {
 	else if ( req.body['delete'] ){
 		deleteGenre( req, res, next );
 	}
+	//Update genre name with new value
+	else if ( req.body['edit'] ){
+		//Testing passed values from edit form
+		console.log("ID: " + req.body.genreID);
+		console.log("ID: " + req.body.name);
+	}
 
 });
 
