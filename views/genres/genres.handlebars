@@ -12,6 +12,24 @@
 		</fieldset>
 
 	</form>
+	
+	<div id="genre-edit-form">
+		<h3>Edit Genre</h3>
+		<form action="/genres" method="POST" >
+
+		<fieldset>
+			<input type="hidden" id="edit-genre-id" name="genreID" value=""/>
+			
+			<label for="editname">Edit Genre
+				<input type="text" id="edit-genre-name" name="name" value="">
+			</label>
+
+			<input type="submit" id="edit-genre-submit" name="edit" value="Submit">
+		</fieldset>
+
+		</form>
+	</div>
+	
 	<h3>Current Genres in the Library</h3>
 	<table>
 		<thead>
@@ -26,8 +44,8 @@
 				<td>{{this.name}}</td>
 				<td>
 					<form>
-						<input type="hidden" value="{{this.id}}" />
-						<input type="submit" class="edit" name="edit" value="Edit" />
+						<input type="hidden" value="{{this.id}}"/>
+						<input type="submit" class="genre-edit" name="{{this.name}}" value="Edit" id="genre-{{this.id}}"/>
 					</form>
 				</td>
 				<td>
