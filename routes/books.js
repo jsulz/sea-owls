@@ -12,6 +12,37 @@ module.exports = {
 			}
 
 			let context = {};
+			context.noSearch = true;
+			context.books = rows;
+
+			mysql.pool.query( 'SELECT id, name FROM genres', (err, rows, fields ) => {
+
+				context.genres = rows;
+
+				mysql.pool.query( 'SELECT id, fname, lname FROM authors', (err, rows, fields ) => {
+
+					context.authors = rows;
+					res.render( 'books/books', context );
+
+				});
+			});
+
+		});
+
+	},
+
+	searchBooks: ( req, res, next ) => {
+
+		mysql.pool.query( 'SELECT id, title, genre, isbn, date_published FROM books WHERE title LIKE ?', '%' + req.query.s + '%', ( err, rows, fields ) => {
+
+			if( err ){
+				next(err);
+				return;
+			}
+
+			let context = {};
+			context.noSearch = false;
+			context.query = req.query.s;
 			context.books = rows;
 
 			mysql.pool.query( 'SELECT id, name FROM genres', (err, rows, fields ) => {

@@ -26,7 +26,7 @@ const { index } = require( './routes/index' );
 const { viewGenres, addGenres, deleteGenre, updateGenre } = require( './routes/genres' );
 const { viewAuthors, addAuthors, deleteAuthor, updateAuthor } = require( './routes/authors' );
 const { viewMembers, viewMember, addMember, addToReadingList, deleteMember, deleteFromReadingList } = require( './routes/members' );
-const { viewBooks, viewBook, addBooks, deleteBook } = require( './routes/books' );
+const { viewBooks, viewBook, addBooks, deleteBook, searchBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
 // Homepage
@@ -61,7 +61,15 @@ app.post( '/member/:memberID', (req, res, next ) => {
 } );
 
 // View all books
-app.get( '/books', viewBooks );
+app.get( '/books', ( req, res, next ) => {
+
+	if( req.query.s ){
+		searchBooks( req, res, next );
+	} else {
+		viewBooks( req, res, next );
+	}
+
+} );
 // Vuew a single book
 app.get( '/book/:bookID', viewBook );
 // Add or delete a book

@@ -1,66 +1,72 @@
 <article>
-	<h2 class="page-title">Books</h2>
-	<h3>Add a New Book to the Sea OWL Library</h3>
-	<form action="/books" method="POST" id="new-book">
+	{{#if noSearch}}
+		<h2 class="page-title">Books</h2>
+		<h3>Add a New Book to the Sea OWL Library</h3>
+		<form action="/books" method="POST" id="new-book">
 
-		<fieldset>
-			<label for="title">Title
-				<input type="text" id="add-title" name="title">
+			<fieldset>
+				<label for="title">Title
+					<input type="text" id="add-title" name="title">
+				</label>
+
+				<label for="date">Date Published
+					<input type="date" id="add-date" name="date_published">
+				</label>
+
+				<label for="isbn">ISBN
+					<input type="text" id="add-isbn" name="isbn">
+				</label>
+
+				<label for="author">Author
+					<select name="author">
+						{{#each authors}}
+						<option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+						{{/each}}
+					</select>
+				</label>
+
+				<label for="genre">Genre
+					<select name="genre">
+						{{#each genres}}
+						<option value="{{this.id}}">{{this.name}}</option>
+						{{/each}}
+					</select>
+				</label>
+
+				<input type="submit" id="new-book-submit" name="add" value="Submit">
+			</fieldset>
+
+		</form>
+
+		<p>If you don't see the author or genre related to the book that you'd like to add in the corresponding dropdown menus in the form above, please add the author using one of the forms below, or go to the <a href="/genres"><strong>Genre<strong></a> or <a href="/authors"><strong>Authors</strong></a> page to see all genres and authors and manage them there!</p>
+		<h3>Add a New Genre</h3>
+		<form action="/genres" method="POST" id="add-genre" >
+			<label for="name">Genre Name
+				<input type="text" id="add-genre-name" name="name">
 			</label>
+			<input type="submit" id="new-genre-submit" name="add" name="Submit">
+		</form>
 
-			<label for="date">Date Published
-				<input type="date" id="add-date" name="date_published">
+		<h3>Add a New Author</h3>
+		<form action="/authors" method="post" id="add-author" >
+			<label for="author-fname">First Name
+				<input type="text" id="add-author-fname" name="fname">
 			</label>
-
-			<label for="isbn">ISBN
-				<input type="text" id="add-isbn" name="isbn">
+			<label for="author-lname">Last Name
+				<input type="text" id="add-author-lname" name="lname">
 			</label>
-
-			<label for="author">Author
-				<select name="author">
-					{{#each authors}}
-					<option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
-					{{/each}}
-				</select>
-			</label>
-
-			<label for="genre">Genre
-				<select name="genre">
-					{{#each genres}}
-					<option value="{{this.id}}">{{this.name}}</option>
-					{{/each}}
-				</select>
-			</label>
-
-			<input type="submit" id="new-book-submit" name="add" value="Submit">
-		</fieldset>
-
-	</form>
-
-	<p>If you don't see the author or genre related to the book that you'd like to add in the corresponding dropdown menus in the form above, please add the author using one of the forms below, or go to the <a href="/genres"><strong>Genre<strong></a> or <a href="/authors"><strong>Authors</strong></a> page to see all genres and authors and manage them there!</p>
-	<h3>Add a New Genre</h3>
-	<form action="/genres" method="POST" id="add-genre" >
-		<label for="name">Genre Name
-			<input type="text" id="add-genre-name" name="name">
-		</label>
-		<input type="submit" id="new-genre-submit" name="add" name="Submit">
-	</form>
-
-	<h3>Add a New Author</h3>
-	<form action="/authors" method="post" id="add-author" >
-		<label for="author-fname">First Name
-			<input type="text" id="add-author-fname" name="fname">
-		</label>
-		<label for="author-lname">Last Name
-			<input type="text" id="add-author-lname" name="lname">
-		</label>
-		<input type="submit" id="new-author-submit" name="add" value="Submit">
-	</form>
-	<h3>Current Books in the Sea OWL Library</h3>
-	<form action="/" method="post" id="search" >
+			<input type="submit" id="new-author-submit" name="add" value="Submit">
+		</form>
+		<h3>Current Books in the Sea OWL Library</h3>
+	{{else}}
+		<h2 class="page-title">Search Results for: "{{query}}"</h2>
+		<p>Return to <a href="/books">view/add books</a></p>
+	{{/if}}
+	<form action="/books" method="get" id="search" >
 		<label for="search">Search by Title
-			<input type="text" id="title-search" name="Search">
+			<input type="text" id="book-search" name="s">
 		</label>
+			<input type="submit" id="search-books" value="Submit">
 	</form>
 	<table>
 		<thead>
