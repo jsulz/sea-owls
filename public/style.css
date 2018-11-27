@@ -355,3 +355,7 @@ article form {
 table form {
 	margin: 0px;
 }
+
+#genre-edit-form, #author-edit-form {
+	display: none;
+}	
