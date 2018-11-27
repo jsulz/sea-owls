@@ -42,8 +42,6 @@ authors.forEach( author => {
 //Displays the hidden edit form and autofills the values of the inputs to the current name/id
 function displayAuthorForm( event ) {
 
-  console.log( event );
-
   let id = event.target.form['author-id'].value
   let fnameTD = document.getElementById( id + '-fname' );
   let lnameTD = document.getElementById( id + '-lname' );
