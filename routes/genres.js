@@ -45,6 +45,20 @@ module.exports = {
 				res.redirect(req.get('referer'));
 		});
 
+	},
+
+	updateGenre: ( req, res, next ) =>{
+
+		mysql.pool.query( 'UPDATE genres SET name=? WHERE id=?', [ req.body.name, req.body.genreID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 }

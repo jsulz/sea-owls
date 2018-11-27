@@ -16,6 +16,28 @@
 		</fieldset>
 
 	</form>
+
+	<div id="author-edit-form">
+		<h3>Edit Genre</h3>
+		<form action="/authors" method="POST" >
+
+		<fieldset>
+			<input type="hidden" id="edit-author-id" name="authorID" value=""/>
+			
+			<label for="editfname">Edit First Name
+				<input type="text" id="edit-author-fname" name="fname" value="">
+			</label>
+
+			<label for="editlname">Edit Last Name
+				<input type="text" id="edit-author-lname" name="lname" value="">
+			</label>
+
+			<input type="submit" id="edit-author-submit" name="edit" value="Submit">
+		</fieldset>
+
+		</form>
+	</div>
+
 	<h3>Current Authors in the Library</h3>
 		{{#if error}}
 			<p>We're sorry, that author cannot currently be removed as they are currently an author on the following title(s):</p>
@@ -37,12 +59,12 @@
 		</thead>
 		{{#each authors}}
 			<tr>
-				<td>{{this.fname}}</td>
-				<td>{{this.lname}}</td>
+				<td id="{{this.id}}-fname">{{this.fname}}</td>
+				<td id="{{this.id}}-lname">{{this.lname}}</td>
 				<td>
 					<form>
-						<input type="hidden" value="{{this.id}}" />
-						<input type="submit" class="edit" name="edit" value="Edit" />
+						<input type="hidden" class="author-id" name="author-id" value="{{this.id}}" />
+						<input type="submit" class="author-edit" name="edit" value="Edit" />
 					</form>
 				</td>
 				<td>

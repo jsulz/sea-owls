@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 const { index } = require( './routes/index' );
-const { viewGenres, addGenres, deleteGenre } = require( './routes/genres' );
-const { viewAuthors, addAuthors, deleteAuthor } = require( './routes/authors' );
+const { viewGenres, addGenres, deleteGenre, updateGenre } = require( './routes/genres' );
+const { viewAuthors, addAuthors, deleteAuthor, updateAuthor } = require( './routes/authors' );
 const { viewMembers, viewMember, addMember, addToReadingList, deleteMember, deleteFromReadingList } = require( './routes/members' );
 const { viewBooks, viewBook, addBooks, deleteBook } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
@@ -36,6 +36,7 @@ app.get('/', index );
 app.get( '/members', viewMembers );
 // View a single member
 app.get( '/member/:memberID', viewMember );
+// Add or delete a member
 app.post( '/members', ( req, res, next ) => {
 
 	// Add a new Member
@@ -63,7 +64,7 @@ app.post( '/member/:memberID', (req, res, next ) => {
 app.get( '/books', viewBooks );
 // Vuew a single book
 app.get( '/book/:bookID', viewBook );
-// Add a new book
+// Add or delete a book
 app.post( '/books', ( req, res, next ) => {
 
 	// Add a new book
@@ -80,6 +81,7 @@ app.post( '/books', ( req, res, next ) => {
 
 // View all genres
 app.get( '/genres', viewGenres );
+// Add, Delete, and Update genres
 app.post( '/genres', ( req, res, next ) => {
 
 	// Add a new genre
@@ -92,9 +94,7 @@ app.post( '/genres', ( req, res, next ) => {
 	}
 	//Update genre name with new value
 	else if ( req.body['edit'] ){
-		//Testing passed values from edit form
-		console.log("ID: " + req.body.genreID);
-		console.log("ID: " + req.body.name);
+		updateGenre( req, res, next );
 	}
 
 });
@@ -111,6 +111,10 @@ app.post( '/authors', ( req, res, next ) => {
 	// Delete the specified author
 	else if ( req.body['delete'] ){
 		deleteAuthor( req, res, next );
+	}
+	// Update author
+	else if ( req.body['edit'] ){
+		updateAuthor( req, res, next );
 	}
 
 });

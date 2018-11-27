@@ -69,6 +69,21 @@ module.exports = {
 		
 		});
 
+	},
+
+	updateAuthor: ( req, res, next ) => {
+
+		mysql.pool.query( 'UPDATE authors SET fname=?, lname=? WHERE id=?', 
+			[ req.body.fname, req.body.lname, req.body.authorID ],  (err, result ) => {
+
+				if( err ){
+					next( err );
+					return;
+				}
+
+				res.redirect(req.get('referer'));
+		});
+
 	}
 
 
