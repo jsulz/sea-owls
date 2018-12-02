@@ -54,7 +54,7 @@ module.exports = {
 							}
 
 							context.authors = rows;
-							console.log( context );
+
 							res.render( 'authors/authors', context );
 
 						})
