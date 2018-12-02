@@ -12,7 +12,7 @@ let handlebars = require('express-handlebars')
 	});
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 2201);
+app.set('port', 1333);
 
 // Body Parser
 let bodyParser = require('body-parser');
@@ -25,7 +25,7 @@ app.use(express.static('public'));
 const { index } = require( './routes/index' );
 const { viewGenres, addGenres, deleteGenre, updateGenre } = require( './routes/genres' );
 const { viewAuthors, addAuthors, deleteAuthor, updateAuthor } = require( './routes/authors' );
-const { viewMembers, viewMember, addMember, addToReadingList, deleteMember, deleteFromReadingList } = require( './routes/members' );
+const { viewMembers, viewMember, addMember, addToReadingList, deleteMember, deleteFromReadingList, updateReadingList } = require( './routes/members' );
 const { viewBooks, viewBook, addBooks, deleteBook, searchBooks } = require( './routes/books' );
 const { serverError, pageNotFound } = require( './routes/errors' );
 
@@ -54,7 +54,9 @@ app.post( '/member/:memberID', (req, res, next ) => {
 
 	if( req.body['add-to-reading-list'] ){
 		addToReadingList( req, res, next );
-	} else if ( req.body['delete'] ){
+	} else if( req.body['edit'] ){
+		updateReadingList( req, res, next );
+	}else if ( req.body['delete'] ){
 		deleteFromReadingList( req, res, next );
 	}
 

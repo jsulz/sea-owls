@@ -112,16 +112,41 @@ module.exports = {
 				return;
 			}
 
-			mysql.pool.query( 'INSERT INTO authored_by ( `bid`, `aid` ) VALUES ( ?, ? )', [ result.insertId, req.body.author ], ( err, result ) => {
+			if( typeof req.body.author === 'object' ){
 
-				if( err ){
-					next( err );
-					return;
+				let mappedArr = [];
+				req.body.author.forEach( (author, index) => {
+					mappedArr[index] = new Array( result.insertId, author );
+				}); 
+
+				if( mappedArr.length > 1 ){
+					
+					mysql.pool.query( 'INSERT INTO authored_by ( `bid`, `aid` ) VALUES ?', [mappedArr] , ( err, result ) => {
+
+						if( err ){
+							next( err );
+							return;
+						}
+
+						res.redirect(req.get('referer'));
+
+					});
 				}
 
-				res.redirect(req.get('referer'));
+			} else {
 
-			});
+				mysql.pool.query( 'INSERT INTO authored_by ( `bid`, `aid` ) VALUES (?, ?)', [ result.insertId, req.body.author ] , ( err, result ) => {
+
+					if( err ){
+						next( err );
+						return;
+					}
+
+					res.redirect(req.get('referer'));
+
+				});
+
+			}
 
 		});
 

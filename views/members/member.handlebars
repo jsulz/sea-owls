@@ -31,8 +31,12 @@
 					<td>{{this.title}}</td>
 					<td>
 						{{this.finished}}
-						<form style="display: inline-block">
-							<input type="hidden" value="{{this.mid}}-{{this.bid}}" />
+						<form method="POST" style="display: inline-block">
+							<input type="hidden" name="edit-mid-bid" value="{{this.mid}}-{{this.bid}}" />
+							<select name="finished">
+								<option value="0">0</option>
+								<option value="1">1</option>
+							</select>
 							<input type="submit" class="edit" name="edit" value="Update Reading/Read" />
 						</form>
 					</td>

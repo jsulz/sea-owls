@@ -36,8 +36,7 @@ module.exports = {
 
 				context.readingList = rows;
 
-				mysql.pool.query( 'SELECT id, title FROM books', ( err, rows, fields ) => {
-
+				mysql.pool.query( 'SELECT id, title FROM books WHERE id NOT IN (SELECT RL.bid FROM sea_owls SO INNER JOIN reading_list RL ON RL.mid = SO.id INNER JOIN books B ON B.id = RL.bid WHERE SO.id=?)', req.params.memberID, ( err, rows, fields ) => {
 
 					context.books = rows; 
 
@@ -76,6 +75,25 @@ module.exports = {
 				}
 
 				res.redirect(req.get('referer'));
+
+		});
+
+	},
+
+	updateReadingList: ( req, res, next ) => {
+
+		let member_book = req.body['edit-mid-bid'].split('-');
+		let memberID = member_book[0]
+		let bookID = member_book[1];
+
+		mysql.pool.query( 'UPDATE reading_list SET finished=? WHERE mid=? AND bid=?', [ req.body.finished, memberID, bookID ], ( err, result ) => {
+
+			if( err ){
+				next( err );
+				return;
+			}
+
+			res.redirect(req.get('referer'));
 
 		});
 

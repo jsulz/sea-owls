@@ -9,20 +9,12 @@
 					<input type="text" id="add-title" name="title">
 				</label>
 
-				<label for="date">Date Published
+				<label for="date_published">Date Published
 					<input type="date" id="add-date" name="date_published">
 				</label>
 
 				<label for="isbn">ISBN
 					<input type="text" id="add-isbn" name="isbn">
-				</label>
-
-				<label for="author">Author
-					<select name="author">
-						{{#each authors}}
-						<option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
-						{{/each}}
-					</select>
 				</label>
 
 				<label for="genre">Genre
@@ -32,6 +24,15 @@
 						{{/each}}
 					</select>
 				</label>
+				
+				<div class="checkbox-group-wrapper">
+					{{#each authors}}
+						<div class="checkbox-group">
+							<input type="checkbox" name="author" value="{{this.id}}">
+							<label for="author">{{this.fname}} {{this.lname}}</label>
+						</div>
+					{{/each}}
+				</div>
 
 				<input type="submit" id="new-book-submit" name="add" value="Submit">
 			</fieldset>
